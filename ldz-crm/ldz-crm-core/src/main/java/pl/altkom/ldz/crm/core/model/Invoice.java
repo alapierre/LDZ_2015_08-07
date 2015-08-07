@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,8 +33,7 @@ public class Invoice extends BaseEntity {
     @JoinColumn(name = "seller_id")
     private Company seller;
     
-    @OneToMany
-    @JoinColumn(name = "invoice_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
     @OrderBy("lp")
     private Set<InvoiceItem> items = new LinkedHashSet<>();
     
@@ -74,6 +74,7 @@ public class Invoice extends BaseEntity {
     }
 
     public Invoice addItem(InvoiceItem item) {
+        item.setInvoice(this);
         items.add(item);
         return this;
     }

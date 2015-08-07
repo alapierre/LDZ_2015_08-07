@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import pl.altkom.ldz.crm.core.dao.InvoiceDAO;
 import pl.altkom.ldz.crm.core.dao.InvoiceItemDAO;
 import pl.altkom.ldz.crm.core.model.Invoice;
@@ -29,6 +30,7 @@ public class InvoiceDAOTest {
     private InvoiceItemDAO invoiceItemDAO;
     
     @Test
+    @Transactional
     public void testCreate() {
         
         Invoice invoice = new Invoice();
@@ -42,11 +44,18 @@ public class InvoiceDAOTest {
         item.setPrice(123);
         item.setVolume(1);
         
-        invoice.addItem(item);
+        invoice
+                .addItem(new InvoiceItem(1, 123, 1))
+                .addItem(new InvoiceItem(2, 234, 1));
         
-        invoiceItemDAO.save(item);
+        //invoiceItemDAO.save(item);
         invoiceDAO.save(invoice);
         
+        Invoice invoiceFromDB = invoiceDAO.findOne(1L);
+        
+        for(InvoiceItem tmp : invoiceFromDB.getItems()) {
+            System.out.println(tmp.getId());
+        }
         
         
     }

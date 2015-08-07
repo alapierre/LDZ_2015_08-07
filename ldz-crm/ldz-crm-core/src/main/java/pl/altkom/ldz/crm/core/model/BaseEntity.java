@@ -52,6 +52,10 @@ public class BaseEntity implements Serializable {
 
         BaseEntity that = (BaseEntity) o;
 
+        if(that.id == null ) {
+            return false;
+        }
+        
         return !(id != null ? !id.equals(that.id) : that.id != null);
     }
 
