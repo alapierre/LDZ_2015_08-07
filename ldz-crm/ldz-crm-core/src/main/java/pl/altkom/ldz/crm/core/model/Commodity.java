@@ -3,11 +3,14 @@
  */
 package pl.altkom.ldz.crm.core.model;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author Adrian Lapierre <adrian@soft-project.pl>
  */
-public class Commodity {
+@Entity
+public class Commodity extends BaseEntity{
     
     private String name;
     private double price;

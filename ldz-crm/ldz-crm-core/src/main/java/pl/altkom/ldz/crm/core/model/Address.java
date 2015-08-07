@@ -3,11 +3,15 @@
  */
 package pl.altkom.ldz.crm.core.model;
 
+import java.io.Serializable;
+import javax.persistence.Embeddable;
+
 /**
  *
  * @author Adrian Lapierre <adrian@soft-project.pl>
  */
-public class Address {
+@Embeddable
+public class Address implements Serializable {
     
     private String city;
     private String postCode;

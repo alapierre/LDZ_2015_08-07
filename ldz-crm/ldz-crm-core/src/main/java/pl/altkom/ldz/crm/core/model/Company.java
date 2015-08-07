@@ -3,14 +3,23 @@
  */
 package pl.altkom.ldz.crm.core.model;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.validation.constraints.Size;
+
 /**
  *
  * @author Adrian Lapierre <adrian@soft-project.pl>
  */
-public class Company {
+@Entity
+public class Company extends BaseEntity{
     
     private String name;
+    
+    @Embedded
     private Address address;
+    
+    @Size(max = 15)
     private String nip;
 
     public String getName() {

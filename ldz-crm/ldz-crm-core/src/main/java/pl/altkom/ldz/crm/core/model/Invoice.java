@@ -4,7 +4,14 @@
 package pl.altkom.ldz.crm.core.model;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.validation.constraints.Size;
 
 /**
@@ -21,6 +28,15 @@ public class Invoice extends BaseEntity {
     
     private Date issuedDate;
 
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Company seller;
+    
+    @OneToMany
+    @JoinColumn(name = "invoice_id")
+    @OrderBy("lp")
+    private Set<InvoiceItem> items = new LinkedHashSet<>();
+    
     public int getNumber() {
         return number;
     }
@@ -44,7 +60,22 @@ public class Invoice extends BaseEntity {
     public void setIssuedDate(Date issuedDate) {
         this.issuedDate = issuedDate;
     }
-    
-    
+
+    public Company getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Company seller) {
+        this.seller = seller;
+    }
+
+    public Set<InvoiceItem> getItems() {
+        return items;
+    }
+
+    public Invoice addItem(InvoiceItem item) {
+        items.add(item);
+        return this;
+    }
     
 }

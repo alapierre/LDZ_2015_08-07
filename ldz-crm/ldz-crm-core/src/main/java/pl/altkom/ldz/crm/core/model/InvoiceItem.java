@@ -3,16 +3,26 @@
  */
 package pl.altkom.ldz.crm.core.model;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  * @author Adrian Lapierre <adrian@soft-project.pl>
  */
-public class InvoiceItem {
+@Entity
+public class InvoiceItem extends BaseEntity {
     
     private int lp;
     private double price;
     private int volume;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "commodity_id")
+    private Commodity commodity;
+    
+    
     public int getLp() {
         return lp;
     }
@@ -36,7 +46,13 @@ public class InvoiceItem {
     public void setVolume(int volume) {
         this.volume = volume;
     }
-    
-    
+
+    public Commodity getCommodity() {
+        return commodity;
+    }
+
+    public void setCommodity(Commodity commodity) {
+        this.commodity = commodity;
+    }
     
 }
