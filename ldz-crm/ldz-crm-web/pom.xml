@@ -212,7 +212,11 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>    
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>${jackson.version}</version>
-        </dependency> 
-            
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ldz-crm-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

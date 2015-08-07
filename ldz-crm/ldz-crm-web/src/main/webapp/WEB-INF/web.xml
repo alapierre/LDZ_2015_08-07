@@ -28,7 +28,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /WEB-INF/ldz-crm-web-servlet.xml          
+            classpath:ldz-crm-core.xml      
         </param-value>
     </context-param>
     
