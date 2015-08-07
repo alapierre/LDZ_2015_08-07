@@ -4,15 +4,21 @@
 package pl.altkom.ldz.crm.core.model;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author Adrian Lapierre <adrian@soft-project.pl>
  */
-public class Invoice {
+@Entity
+public class Invoice extends BaseEntity {
     
     private int number;
+    
+    @Size(max = 128)
     private String placeOfIssue;
+    
     private Date issuedDate;
 
     public int getNumber() {
